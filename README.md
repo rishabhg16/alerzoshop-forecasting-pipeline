@@ -18,6 +18,10 @@ A time-series demand forecasting pipeline using Python, Pandas, and TensorFlow t
 ├── model/
 │   ├── lstm_model/              # Saved Keras model
 │   └── scaler.npy               # Saved scaler for inverse transforms
+├── Dockerfile                   # Container spec
+├── .github/
+│   └── workflows/
+│       └── retrain.yml          # GitHub Actions workflow for automation
 ├── README.md
 └── requirements.txt
 ```
@@ -43,6 +47,18 @@ $ python forecast_pipeline.py
 ```
 
 Trained model and scaler will be saved in the `model/` directory.
+
+### 🐳 Running in Docker
+```bash
+# Build the image
+$ docker build -t alerzoshop-forecast .
+
+# Run the container
+$ docker run --rm -v $(pwd):/app alerzoshop-forecast
+```
+
+### 🤖 GitHub Actions (Scheduled Retraining)
+This repo includes a workflow to retrain the model daily using the latest `sales_data.csv`.
 
 ### 🧠 Future Enhancements
 - Streamlit dashboard for visualization
